@@ -35,6 +35,4 @@ public class XmlUser {
     public void setUsername(String username) {
         this.username = username;
     }
-    // new commit
-
 }

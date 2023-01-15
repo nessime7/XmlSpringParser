@@ -21,6 +21,4 @@ public class XmlUsers {
         public void setUsers(List<XmlUser> users) {
                 this.users = users;
         }
-        // new commit
-
 }
