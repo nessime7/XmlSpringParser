@@ -14,18 +14,7 @@ import java.io.IOException;
 @RestController
 public class XmlController {
 
-    private final XmlService xmlService;
 
-    @Autowired
-    public XmlController(XmlService xmlService) {
-        this.xmlService = xmlService;
-    }
-
-    @PostMapping("/upload")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException, JAXBException {
-        final var result = xmlService.handleFileUpload(file);
-        return ResponseEntity.ok(result);
-    }
 }
 
 //    final var jaxbContext = JAXBContext.newInstance(XmlUsers.class);

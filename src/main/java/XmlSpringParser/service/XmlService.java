@@ -12,11 +12,7 @@ import java.io.IOException;
 @Service
 public class XmlService {
     public String handleFileUpload(MultipartFile file) throws JAXBException, IOException {
-        final var jaxbContext = JAXBContext.newInstance(XmlUsers.class);
-        final var jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        final var users = (XmlUsers) jaxbUnmarshaller.unmarshal(file.getInputStream());
-        final var result = users.getUsers();
-        final var objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(result);
+
+        return null;
     }
 }

@@ -11,14 +11,4 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class XmlUsers {
 
-        @XmlElement(name = "user")
-        List<XmlUser> users = new ArrayList<XmlUser>();
-
-        public List<XmlUser> getUsers() {
-                return users;
-        }
-
-        public void setUsers(List<XmlUser> users) {
-                this.users = users;
-        }
-}
+   }

@@ -20,29 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class XmlControllerTest {
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @BeforeEach
-    void setUp() {
-        RestAssured.port = port;
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-    }
-
-    @Test
-    void should_return_users() throws Exception {
-        MockMultipartFile file = new MockMultipartFile("file", "users.xml",
-                MediaType.TEXT_PLAIN_VALUE,
-                this.getClass().getClassLoader().getResourceAsStream("user/users.xml"));
-
-        mockMvc.perform(multipart("/upload").file(file))
-                .andExpect(status().isOk());
 
 //        given().contentType(ContentType.XML)
 //                .body(TestUtils.getRequestBodyFromFile("users.xml", CONTEXT))
@@ -53,4 +30,3 @@ public class XmlControllerTest {
 //                .body("", equalTo(TestUtils.getPath("response/return-users.json", CONTEXT).get("")));
 //    }
     }
-}
