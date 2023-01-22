@@ -1,29 +1,39 @@
 package XmlSpringParser.controller;
 
-import XmlSpringParser.model.XmlUsers;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import XmlSpringParser.service.XmlService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 @RestController
 public class XmlController {
 
+    private final XmlService xmlService;
+
+    @Autowired
+    public XmlController(XmlService xmlService) {
+        this.xmlService = xmlService;
+    }
+
     @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException, JAXBException {
-        final var jaxbContext = JAXBContext.newInstance(XmlUsers.class);
-        final var jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        final var users = (XmlUsers) jaxbUnmarshaller.unmarshal(file.getInputStream());
-        final var result = users.getUsers();
-        final var objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(result);
+    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException, JAXBException {
+        final var result = xmlService.handleFileUpload(file);
+        return ResponseEntity.ok(result);
     }
 }
+
+//    final var jaxbContext = JAXBContext.newInstance(XmlUsers.class);
+//    final var jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+//    final var users = (XmlUsers) jaxbUnmarshaller.unmarshal(file.getInputStream());
+//    final var result = users.getUsers();
+//    final var objectMapper = new ObjectMapper();
+//        return objectMapper.writeValueAsString(result);
 
 // My first converter and it returns text
 //        // convertFile pusty

@@ -22,7 +22,6 @@ public class XmlControllerTest {
 
     @LocalServerPort
     private int port;
-    private static final String CONTEXT = "user";
 
     @Autowired
     private MockMvc mockMvc;
@@ -41,6 +40,7 @@ public class XmlControllerTest {
         MockMultipartFile file = new MockMultipartFile("file", "users.xml",
                 MediaType.TEXT_PLAIN_VALUE,
                 this.getClass().getClassLoader().getResourceAsStream("user/users.xml"));
+
         mockMvc.perform(multipart("/upload").file(file))
                 .andExpect(status().isOk());
 
