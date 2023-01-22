@@ -2,7 +2,6 @@ package XmlSpringParser.model;
 
 import javax.xml.bind.annotation.*;
 
-// pr
 @XmlRootElement(name = "user")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class XmlUser {
