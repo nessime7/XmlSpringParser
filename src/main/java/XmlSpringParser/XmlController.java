@@ -16,11 +16,11 @@ public class XmlController {
 
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException, JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance(XmlUsers.class);
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        XmlUsers users = (XmlUsers) jaxbUnmarshaller.unmarshal(file.getInputStream());
+        final var jaxbContext = JAXBContext.newInstance(XmlUsers.class);
+        final var jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        final var users = (XmlUsers) jaxbUnmarshaller.unmarshal(file.getInputStream());
         final var result = users.getUsers();
-        ObjectMapper objectMapper = new ObjectMapper();
+        final var objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(result);
     }
 }

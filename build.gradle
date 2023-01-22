@@ -15,10 +15,19 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
 	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
 	implementation group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '2.3.1'
+	testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+
+	// new
+//	testImplementation group: 'org.junit.platform', name: 'junit-platform-surefire-provider', version: '1.0.0-M1'
+//	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+//	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+//	testImplementation('org.junit.jupiter:junit-jupiter:5.4.0')
+//	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+
 }
 
 tasks.named('test') {
