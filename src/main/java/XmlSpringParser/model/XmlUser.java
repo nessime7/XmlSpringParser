@@ -1,4 +1,4 @@
-package XmlSpringParser;
+package XmlSpringParser.model;
 
 import javax.xml.bind.annotation.*;
 

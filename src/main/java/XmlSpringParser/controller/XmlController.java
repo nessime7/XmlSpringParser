@@ -1,5 +1,6 @@
-package XmlSpringParser;
+package XmlSpringParser.controller;
 
+import XmlSpringParser.model.XmlUsers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
 
 @RestController
