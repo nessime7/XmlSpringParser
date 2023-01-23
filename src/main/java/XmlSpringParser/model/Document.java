@@ -6,19 +6,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
-//
+
 @XmlRootElement(name = "users")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class XmlUsers {
+public class Document {
 
         @XmlElement(name = "user")
-        List<XmlUser> users = new ArrayList<XmlUser>();
+        private final List<User> users = new ArrayList<User>();
 
-        public List<XmlUser> getUsers() {
+        public List<User> getUsers() {
                 return users;
-        }
-
-        public void setUsers(List<XmlUser> users) {
-                this.users = users;
         }
 }

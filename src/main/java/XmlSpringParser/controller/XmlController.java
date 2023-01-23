@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-//
+
 @RestController
 public class XmlController {
 
@@ -22,8 +22,8 @@ public class XmlController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException, JAXBException {
-        final var result = xmlService.handleFileUpload(file);
+    public ResponseEntity<String> processXmlFile(@RequestParam("file") MultipartFile file) throws IOException, JAXBException {
+        final var result = xmlService.processXmlFile(file);
         return ResponseEntity.ok(result);
     }
 }

@@ -14,11 +14,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 @SpringBootTest(classes = {XmlSpringParserApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class XmlControllerTest {
+public class XmlIntegrationTest {
 
     @LocalServerPort
     private int port;
@@ -42,7 +42,16 @@ public class XmlControllerTest {
                 this.getClass().getClassLoader().getResourceAsStream("user/users.xml"));
 
         mockMvc.perform(multipart("/upload").file(file))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name").value("Kalle Anka"))
+                .andExpect(jsonPath("$[0].email").value("donald@email.dt"))
+                .andExpect(jsonPath("$[0].username").value("donaldd"))
+                .andExpect(jsonPath("$[1].name").value("Joakim von Anka"))
+                .andExpect(jsonPath("$[1].email").value("scrooge@email.dt"))
+                .andExpect(jsonPath("$[1].username").value("onkelscrooge"))
+                .andExpect(jsonPath("$[2].name").value("Arne Anka"))
+                .andExpect(jsonPath("$[2].email").value("arne@email.com"))
+                .andExpect(jsonPath("$[2].username").value("arneanka"));
 
 //        given().contentType(ContentType.XML)
 //                .body(TestUtils.getRequestBodyFromFile("users.xml", CONTEXT))
