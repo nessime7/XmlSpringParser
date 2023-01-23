@@ -1,0 +1,7 @@
+package XmlSpringParser.service;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class XmlServiceTest {
+
+}
