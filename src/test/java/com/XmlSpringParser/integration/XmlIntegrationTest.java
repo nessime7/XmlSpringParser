@@ -1,7 +1,8 @@
-package com.XmlSpringParser;
+package com.XmlSpringParser.integration;
 
 import XmlSpringParser.XmlSpringParserApplication;
 import io.restassured.RestAssured;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,10 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import javax.xml.bind.UnmarshalException;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -52,6 +56,20 @@ public class XmlIntegrationTest {
                 .andExpect(jsonPath("$[2].name").value("Arne Anka"))
                 .andExpect(jsonPath("$[2].email").value("arne@email.com"))
                 .andExpect(jsonPath("$[2].username").value("arneanka"));
+    }
+        @Test
+        void should_return_error() throws Exception {
+            MockMultipartFile file = new MockMultipartFile("file", "users.csv",
+                    MediaType.TEXT_PLAIN_VALUE,
+                    this.getClass().getClassLoader().getResourceAsStream("user/users.csv"));
+
+            Assertions
+                    .assertThatThrownBy(
+                            () -> mockMvc.perform(MockMvcRequestBuilders.multipart("/upload").file(file)))
+                    .hasCauseInstanceOf(UnmarshalException.class)
+                    .hasMessageContaining("Request processing failed: javax.xml.bind.UnmarshalException\n" +
+                            " - with linked exception:\n" +
+                            "[org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.]");
 
 //        given().contentType(ContentType.XML)
 //                .body(TestUtils.getRequestBodyFromFile("users.xml", CONTEXT))
