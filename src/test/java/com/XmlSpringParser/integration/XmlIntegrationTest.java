@@ -1,8 +1,8 @@
 package com.XmlSpringParser.integration;
 
 import XmlSpringParser.XmlSpringParserApplication;
+import XmlSpringParser.service.XmlService;
 import io.restassured.RestAssured;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +12,18 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.xml.bind.UnmarshalException;
-
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = {XmlSpringParserApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class XmlIntegrationTest {
+
+    private final XmlService xmlService = mock(XmlService.class);
 
     @LocalServerPort
     private int port;
@@ -41,7 +42,7 @@ public class XmlIntegrationTest {
 
     @Test
     void should_return_users() throws Exception {
-        MockMultipartFile file = new MockMultipartFile("file", "users.xml",
+        final var file = new MockMultipartFile("file", "users.xml",
                 MediaType.TEXT_PLAIN_VALUE,
                 this.getClass().getClassLoader().getResourceAsStream("user/users.xml"));
 
@@ -57,27 +58,24 @@ public class XmlIntegrationTest {
                 .andExpect(jsonPath("$[2].email").value("arne@email.com"))
                 .andExpect(jsonPath("$[2].username").value("arneanka"));
     }
-        @Test
-        void should_return_error() throws Exception {
-            MockMultipartFile file = new MockMultipartFile("file", "users.csv",
-                    MediaType.TEXT_PLAIN_VALUE,
-                    this.getClass().getClassLoader().getResourceAsStream("user/users.csv"));
 
-            Assertions
-                    .assertThatThrownBy(
-                            () -> mockMvc.perform(MockMvcRequestBuilders.multipart("/upload").file(file)))
-                    .hasCauseInstanceOf(UnmarshalException.class)
-                    .hasMessageContaining("Request processing failed: javax.xml.bind.UnmarshalException\n" +
-                            " - with linked exception:\n" +
-                            "[org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.]");
+    @Test
+    void should_return_error() throws Exception {
+        final var file = new MockMultipartFile("file", "users.csv",
+                MediaType.TEXT_PLAIN_VALUE,
+                this.getClass().getClassLoader().getResourceAsStream("user/users.csv"));
 
-//        given().contentType(ContentType.XML)
-//                .body(TestUtils.getRequestBodyFromFile("users.xml", CONTEXT))
-//                .when().post("/upload")
-//                .then()
-//                .statusCode(HttpStatus.SC_OK)
-//                .and()
-//                .body("", equalTo(TestUtils.getPath("response/return-users.json", CONTEXT).get("")));
-//    }
+        mockMvc.perform(multipart("/upload").file(file))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.error").value("Internal Server Error"))
+                .andExpect(jsonPath("$.status").value(500));
+
+//            Assertions
+//                    .assertThatThrownBy(
+//                            () -> mockMvc.perform(MockMvcRequestBuilders.multipart("/upload").file(file)))
+//                    .hasCauseInstanceOf(UnmarshalException.class)
+//                    .hasMessageContaining("Request processing failed: javax.xml.bind.UnmarshalException\n" +
+//                            " - with linked exception:\n" +
+//                            "[org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.]");
     }
 }

@@ -17,7 +17,7 @@ class XmlServiceTest {
     @Test
     void should_return_users() throws IOException, JAXBException {
         // given
-        MockMultipartFile file = new MockMultipartFile("file", "users.xml",
+        final var file = new MockMultipartFile("file", "users.xml",
                 MediaType.TEXT_PLAIN_VALUE,
                 this.getClass().getClassLoader().getResourceAsStream("user/users.xml"));
 
