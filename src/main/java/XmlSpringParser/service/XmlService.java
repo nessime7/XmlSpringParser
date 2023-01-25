@@ -20,16 +20,3 @@ public class XmlService {
         return objectMapper.writeValueAsString(result);
     }
 }
-
-//    final var objectMapper = new ObjectMapper();
-//        try {
-//final var jaxbContext = JAXBContext.newInstance(Document.class);
-//final var jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//final var users = (Document) jaxbUnmarshaller.unmarshal(file.getInputStream());
-//final var result = users.getUsers();
-//        return objectMapper.writeValueAsString(result);
-//        } catch (JAXBException | IOException e) {
-//        System.out.println("Error parsing XML: " + e.getMessage());
-//        }
-//        return objectMapper.toString();
-//        }
