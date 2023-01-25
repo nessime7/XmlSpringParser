@@ -66,7 +66,7 @@ public class XmlIntegrationTest {
                 this.getClass().getClassLoader().getResourceAsStream("user/users.csv"));
 
         mockMvc.perform(multipart("/upload").file(file))
-                .andExpect(status().isExpectationFailed())
-                .andReturn().getResponse().equals("Could not upload the file: users.csv! You need to parse XML File.");
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors").value("Could not upload the file! You need to parse XML File."));
     }
 }
