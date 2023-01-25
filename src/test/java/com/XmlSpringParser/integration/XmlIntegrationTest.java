@@ -12,10 +12,15 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.context.WebApplicationContext;
 
+import static net.bytebuddy.matcher.ElementMatchers.is;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -66,16 +71,7 @@ public class XmlIntegrationTest {
                 this.getClass().getClassLoader().getResourceAsStream("user/users.csv"));
 
         mockMvc.perform(multipart("/upload").file(file))
-                .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.error").value("Internal Server Error"))
-                .andExpect(jsonPath("$.status").value(500));
-
-//            Assertions
-//                    .assertThatThrownBy(
-//                            () -> mockMvc.perform(MockMvcRequestBuilders.multipart("/upload").file(file)))
-//                    .hasCauseInstanceOf(UnmarshalException.class)
-//                    .hasMessageContaining("Request processing failed: javax.xml.bind.UnmarshalException\n" +
-//                            " - with linked exception:\n" +
-//                            "[org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.]");
+                .andExpect(status().isExpectationFailed())
+                .andReturn().getResponse().equals("Could not upload the file: users.csv! You need to parse XML File.");
     }
 }
