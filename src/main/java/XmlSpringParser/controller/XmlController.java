@@ -31,9 +31,9 @@ public class XmlController {
     }
 
     @ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> handleAll(Exception ex) {
-        ApiError apiError = new ApiError(
-                HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), "Could not upload the file! You need to parse XML File.");
+    public ResponseEntity<Object> handleAll() {
+        final var apiError = new ApiError(
+                HttpStatus.BAD_REQUEST, "Could not upload the file! You need to parse XML File.");
         return new ResponseEntity<>(
                 apiError, new HttpHeaders(), apiError.getStatus());
     }
