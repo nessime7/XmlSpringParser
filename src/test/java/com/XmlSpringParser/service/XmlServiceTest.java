@@ -27,5 +27,4 @@ class XmlServiceTest {
         // then
         assertEquals(result, "[{\"name\":\"Kalle Anka\",\"email\":\"donald@email.dt\",\"username\":\"donaldd\"},{\"name\":\"Joakim von Anka\",\"email\":\"scrooge@email.dt\",\"username\":\"onkelscrooge\"},{\"name\":\"Arne Anka\",\"email\":\"arne@email.com\",\"username\":\"arneanka\"}]");
     }
-
 }
