@@ -2,10 +2,7 @@ package XmlSpringParser.controller;
 
 import XmlSpringParser.service.XmlService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,14 +25,6 @@ public class XmlController {
     public ResponseEntity<String> processXmlFile(@RequestParam("file") MultipartFile file) throws IOException, JAXBException {
         final var result = xmlService.processXmlFile(file);
         return ResponseEntity.ok(result);
-    }
-
-    @ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> handleAll() {
-        final var apiError = new ApiError(
-                HttpStatus.BAD_REQUEST, "Could not upload the file! You need to parse XML File.");
-        return new ResponseEntity<>(
-                apiError, new HttpHeaders(), apiError.getStatus());
     }
 }
 

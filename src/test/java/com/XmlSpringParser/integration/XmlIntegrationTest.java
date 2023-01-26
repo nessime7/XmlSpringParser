@@ -52,7 +52,7 @@ public class XmlIntegrationTest {
     }
 
     @Test
-    void should_return_error() throws Exception {
+    void should_return_error_when_input_is_csv() throws Exception {
         final var file = new MockMultipartFile("file", "users.csv",
                 MediaType.TEXT_PLAIN_VALUE,
                 this.getClass().getClassLoader().getResourceAsStream("user/users.csv"));

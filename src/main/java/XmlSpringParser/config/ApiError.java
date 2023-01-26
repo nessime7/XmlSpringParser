@@ -1,4 +1,4 @@
-package XmlSpringParser.controller;
+package XmlSpringParser.config;
 
 import java.util.Arrays;
 import java.util.List;
