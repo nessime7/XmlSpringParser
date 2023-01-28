@@ -25,20 +25,11 @@ public class XmlController {
     }
 
     @PostMapping("/upload")
+    // zwracana jest Lista z użystkownikami, parametr MultipartFile i metoda może wyrzucić wyjątki typu IO i JAXB
     public ResponseEntity<List<User>> processXmlFile(@RequestParam("file") MultipartFile file) throws IOException, JAXBException {
+     // przypisanie do zmiennej result wyniku metody processXmlFile z parametrem file
         final var result = xmlService.processXmlFile(file);
+        // zwrócenie naszej odpowiedzi oraz statusu OK
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
-
-//    @PostMapping("/upload")
-//    public ResponseEntity<String> processXmlFile(@RequestParam("file") MultipartFile file) throws IOException, JAXBException {
-//        String message = "";
-//        try {
-//            final var result = xmlService.processXmlFile(file);
-//            return ResponseEntity.ok(result);
-//        } catch (Exception e) {
-//            message = "Could not upload the file: " + file.getOriginalFilename() + "! You need to parse XML File.";
-//            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
-//        }
-//    }

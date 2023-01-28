@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class XmlService {
+    // metoda zwraca Listę Userów, jako parametr MultipartFile, całą resztę rozpisywałam już wcześniej
     public List<User> processXmlFile(MultipartFile file) throws JAXBException, IOException {
         final var jaxbContext = JAXBContext.newInstance(Document.class);
         final var jaxbUnmarshaller = jaxbContext.createUnmarshaller();

@@ -5,31 +5,24 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
+// klasa pomocna przy obsłudze błędów
 public class ApiError {
 
-    private HttpStatus status;
-    private List<String> errors;
+    private final HttpStatus status;
+    private final List<String> errors;
 
-    public ApiError() {
-        super();
-    }
-
-    public ApiError(final HttpStatus status, final List<String> errors) {
-        super();
-        this.status = status;
-        this.errors = errors;
-    }
-
+    // konstruktor metody
     public ApiError(final HttpStatus status, final String error) {
-        super();
         this.status = status;
         errors = Arrays.asList(error);
     }
 
+    // metoda która ma nam zwrócić HttpStatus
     public HttpStatus getStatus() {
         return status;
     }
 
+    // metoda która ma zwrócić nam Stringa z wiadomością o błędzie
     public List<String> getErrors() {
         return errors;
     }

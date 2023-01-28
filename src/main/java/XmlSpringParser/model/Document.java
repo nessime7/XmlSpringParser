@@ -14,6 +14,7 @@ public class Document {
         @XmlElement(name = "user")
         private final List<User> users = new ArrayList<User>();
 
+        // pobieranie z Listy wszystkich userów
         public List<User> getUsers() {
                 return users;
         }
