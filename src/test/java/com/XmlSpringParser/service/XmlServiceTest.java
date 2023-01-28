@@ -10,10 +10,10 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 class XmlServiceTest {
 
     private final XmlService xmlService = new XmlService();
-
 
     @Test
     void should_return_users() throws IOException, JAXBException {
@@ -27,8 +27,17 @@ class XmlServiceTest {
 
         // then
         assertEquals(result.get(0).getName(), "Kalle Anka");
+        assertEquals(result.get(0).getUsername(), "donaldd");
+        assertEquals(result.get(0).getEmail(), "donald@email.dt");
+
         assertEquals(result.get(1).getName(), "Joakim von Anka");
+        assertEquals(result.get(1).getUsername(), "onkelscrooge");
+        assertEquals(result.get(1).getEmail(), "scrooge@email.dt");
+
         assertEquals(result.get(2).getName(), "Arne Anka");
+        assertEquals(result.get(2).getUsername(), "arneanka");
+        assertEquals(result.get(2).getEmail(), "arne@email.com");
+
         assertEquals(result.size(), 3);
     }
 }
