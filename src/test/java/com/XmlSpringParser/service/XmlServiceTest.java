@@ -14,6 +14,7 @@ class XmlServiceTest {
 
     private final XmlService xmlService = new XmlService();
 
+
     @Test
     void should_return_users() throws IOException, JAXBException {
         // given
@@ -25,6 +26,6 @@ class XmlServiceTest {
         var result = xmlService.processXmlFile(file);
 
         // then
-        assertEquals(result, "[{\"name\":\"Kalle Anka\",\"email\":\"donald@email.dt\",\"username\":\"donaldd\"},{\"name\":\"Joakim von Anka\",\"email\":\"scrooge@email.dt\",\"username\":\"onkelscrooge\"},{\"name\":\"Arne Anka\",\"email\":\"arne@email.com\",\"username\":\"arneanka\"}]");
+        assertEquals(result.toString(), "[{\"name\":\"Kalle Anka\",\"email\":\"donald@email.dt\",\"username\":\"donaldd\"}, {\"name\":\"Joakim von Anka\",\"email\":\"scrooge@email.dt\",\"username\":\"onkelscrooge\"}, {\"name\":\"Arne Anka\",\"email\":\"arne@email.com\",\"username\":\"arneanka\"}]");
     }
 }
