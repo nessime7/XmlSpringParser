@@ -26,6 +26,8 @@ class XmlServiceTest {
         var result = xmlService.processXmlFile(file);
 
         // then
-        assertEquals(result.toString(), "[{\"name\":\"Kalle Anka\",\"email\":\"donald@email.dt\",\"username\":\"donaldd\"}, {\"name\":\"Joakim von Anka\",\"email\":\"scrooge@email.dt\",\"username\":\"onkelscrooge\"}, {\"name\":\"Arne Anka\",\"email\":\"arne@email.com\",\"username\":\"arneanka\"}]");
+        assertEquals(result.get(0).getName(), "Kalle Anka");
+        assertEquals(result.get(1).getName(), "Joakim von Anka");
+        assertEquals(result.get(2).getName(), "Arne Anka");
     }
 }

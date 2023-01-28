@@ -23,11 +23,4 @@ public class User {
     public String getUsername() {
         return username;
     }
-
-    @Override
-    public String toString() {
-        return "{\"name\":" + "\"" + name + "\"," +
-                "\"email\":" + "\"" + email + "\"," +
-                "\"username\":" + "\"" + username + "\"}";
-    }
 }
