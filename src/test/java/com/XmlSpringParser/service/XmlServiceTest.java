@@ -29,5 +29,6 @@ class XmlServiceTest {
         assertEquals(result.get(0).getName(), "Kalle Anka");
         assertEquals(result.get(1).getName(), "Joakim von Anka");
         assertEquals(result.get(2).getName(), "Arne Anka");
+        assertEquals(result.size(), 3);
     }
 }
