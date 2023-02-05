@@ -1,6 +1,6 @@
 package com.XmlSpringParser.integration;
 
-import XmlSpringParser.XmlSpringParserApplication;
+import com.XmlSpringParser.XmlSpringParserApplication;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
