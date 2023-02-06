@@ -38,5 +38,4 @@ class XmlServiceTest {
 
         assertEquals(result.size(), 3);
     }
-
 }

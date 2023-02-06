@@ -18,5 +18,4 @@ public class Document {
         public List<User> getUsers() {
                 return users;
         }
-
 }

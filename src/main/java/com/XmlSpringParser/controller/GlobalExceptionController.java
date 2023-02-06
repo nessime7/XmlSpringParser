@@ -18,5 +18,4 @@ public class GlobalExceptionController {
         return new ResponseEntity<>(
                 apiError, new HttpHeaders(), apiError.getStatus());
     }
-
 }
