@@ -1,6 +1,6 @@
 Assumptions:
 - Input file must be ended .xml
-![img.png](img.png)
+![img_1.png](img_1.png)
 
 Example:
 - Input
