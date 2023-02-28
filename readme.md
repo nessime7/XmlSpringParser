@@ -1,37 +1,59 @@
-Assumptions:
-- Input file must be ended .xml
-![img_1.png](img_1.png)
+# XmlSpringParser
 
-Example:
-- Input
-users.xml
-- Output
-  [
-  {
-  "name": "Kalle Anka",
-  "email": "donald@email.dt",
-  "username": "donaldd"
-  },
-  {
-  "name": "Joakim von Anka",
-  "email": "scrooge@email.dt",
-  "username": "onkelscrooge"
-  },
-  {
-  "name": "Arne Anka",
-  "email": "arne@email.com",
-  "username": "arneanka"
-  }
-  ]
+##Description:  
+Microservice, which is parsing xml file into json response.
 
-How to run:
-To build executable file, please use
-./gradlew shadowJar
+Key points:
+- Gradle - build automation system, optionally there is also Gradle wrapper
+- Java 11
+- Spring Boot
+- REST API
+
+To build project, please use:
+```
+gradle build
+```
 
 To execute tests:
-./gradlew test
+```
+gradle test
+```
 
-Contact:
-Sara - sara.przebinda@gmail.com
-Project link: https://github.com/nessime7/XmlSpringParser
-My GitHub: https://github.com/nessime7
+To run program after build:
+```
+gradle run
+```
+
+After above execution, service will start at port 8080.
+
+## Requests:
+
+### Upload file:
+
+Request:
+```
+curl --location --request POST 'http://localhost:8080/upload' \
+--form 'file=@"/C:/PATH_TO_FILE/users.xml"'
+```
+Response:
+```
+200 OK
+
+[
+    {
+        "name": "Kalle Anka",
+        "email": "donald@email.dt",
+        "username": "donaldd"
+    },
+    {
+        "name": "Joakim von Anka",
+        "email": "scrooge@email.dt",
+        "username": "onkelscrooge"
+    },
+    {
+        "name": "Arne Anka",
+        "email": "arne@email.com",
+        "username": "arneanka"
+    }
+]
+```
