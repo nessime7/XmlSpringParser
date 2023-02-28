@@ -28,6 +28,8 @@ After above execution, service will start at port 8080.
 
 ## Requests:
 
+Example file: [users.xml](users.xml)
+
 ### Upload file:
 
 Request:
