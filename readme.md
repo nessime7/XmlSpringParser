@@ -1,7 +1,7 @@
 # XmlSpringParser
 
 ## Description:  
-Microservice, which is parsing xml file into json response.
+Service, which is parsing xml file into json response.
 
 Key points:
 - Gradle - build automation system, optionally there is also Gradle wrapper
