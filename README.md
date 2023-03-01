@@ -5,7 +5,7 @@ Service, which is parsing xml file into json response.
 
 Key points:
 - Gradle - build automation system, optionally there is also Gradle wrapper
-- Java 11
+- Java 17
 - Spring Boot
 - REST API
 
@@ -25,17 +25,18 @@ gradle run
 ```
 
 After above execution, service will start at port 8080.
+Please be aware, you need to have gradle with java 17.
 
 ## Requests:
 
 Example file: [users.xml](users.xml)
 
 ### Upload file:
-
+#### Example
 Request:
 ```
 curl --location --request POST 'http://localhost:8080/upload' \
---form 'file=@"/C:/PATH_TO_FILE/users.xml"'
+--form 'file=@"/[PATH_TO_FILE]"'
 ```
 Response:
 ```
